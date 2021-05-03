@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <link href="css/template.css" rel="stylesheet">
+    <link href="css/checkout.css" rel="stylesheet">
+
+    <title>Checkout</title>
+</head>
+    <body>
+        <main class="container-fluid">
+            <div class="row fullscreen">
+                <section class="col">
+                    <div class="d-flex justify-content-center">
+                        <a href="navigation.html">
+                            <img class="mt-4 logo-size" src="assets/logo.svg" alt="LOGO">
+                        </a>
+                    </div>
+                    <form class="col-10 offset-1">
+                        <div class="mt-5 fw-bold">
+                            Kontaktinformationen
+                        </div>
+                        <div class="col mt-2">
+                            <input type="email" class="form-control" placeholder="Email" aria-label="firstName">
+                        </div>
+                    </form>
+                    <form class="col-md-10 offset-1">
+                        <div class="mt-5 fw-bold">
+                            Lieferadresse
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Vorname" aria-label="firstName">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Nachname" aria-label="lastName">
+                            </div>
+                        </div>
+                        <div class="col mt-2">
+                            <input type="text" class="form-control" placeholder="Firma (Optional)" aria-label="company">
+                        </div>
+                        <div class="col mt-2">
+                            <input type="text" class="form-control" placeholder="Straße und Hausnummer" aria-label="street">
+                        </div>
+                        <div class="col mt-2">
+                            <input type="text" class="form-control" placeholder="Zusätzliche Adresse (Optional)" aria-label="additionalAdress">
+                        </div>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="PLZ" aria-label="zipCode">
+                            </div>
+                            <div class="col">
+                                <input type="text" class="form-control" placeholder="Ort" aria-label="city">
+                            </div>
+                        </div>
+                        <select class="form-select mt-2" aria-label="example">
+                            <option selected>Deutschland</option>
+                            <option value="1">Österreich</option>
+                            <option value="2">Schweiz</option>
+                        </select>
+                    </form>
+                    <form class="col-10 offset-1">
+                        <div class="row">
+                            <div class="col">
+                                <div class="mt-5 fw-bold">
+                                    Versand
+                                </div>
+                                <div class="col">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="radio" name="dispatch" id="dhl" checked>
+                                        <label class="form-check-label" for="dhl">
+                                            DHL
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="dispatch" id="hermes">
+                                        <label class="form-check-label" for="hermes">
+                                            Hermes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="mt-5 fw-bold">
+                                    Zahlung
+                                </div>
+                                <div class="col">
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="radio" name="payment" id="invoice" checked>
+                                        <label class="form-check-label" for="invoice">
+                                            Rechnung
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="payment" id="creditcard">
+                                        <label onclick="collapse()" class="form-check-label" for="creditcard">
+                                            Kreditkarte
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col collapse" id="creditInfo">
+                                    <div class="col mt-2">
+                                        <input type="text" class="form-control" placeholder="Karteninhaber" aria-label="owner">
+                                    </div>
+                                    <div class="col mt-2">
+                                        <input type="text" class="form-control" placeholder="Kreditkartennummer" aria-label="cardnumber">
+                                    </div>
+                                    <div class="row mt-2">
+                                        <div class="col">
+                                            <input type="month" class="form-control" placeholder="Datum" aria-label="date">
+                                        </div>
+                                        <div class="col">
+                                            <input type="text" class="form-control" placeholder="CVC" aria-label="pin">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between mt-5">
+                            <a href="navigation.html" class="link-primary">< Zurück</a>
+                            <a href="checkout-1.html">
+                                <button type="button" class="btn btn-primary">Überprüfen</button>
+                            </a>
+                        </div>
+                    </form>
+                </section>
+                <section class="col bg-light">
+                    <div class="row">
+                        <div class="col offset-1 mt-5">
+                            <img class="product-size" src="assets/buch.png" alt="Produkt">
+                            <span class="ms-3">1x Sebastian Fitzek</span>
+                        </div>
+                        <div class="col align-self-center mt-5">
+                            <span class="ms-3">0,00 €</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-1 mt-5">
+                            <img class="product-size" src="assets/buch.png" alt="Produkt">
+                            <span class="ms-3">1x Sebastian Fitzek</span>
+                        </div>
+                        <div class="col align-self-center mt-5">
+                            <span class="ms-3">0,00 €</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-1 mt-5">
+                            <img class="product-size" src="assets/buch.png" alt="Produkt">
+                            <span class="ms-3">1x Sebastian Fitzek</span>
+                        </div>
+                        <div class="col align-self-center mt-5">
+                            <span class="ms-3">0,00 €</span>
+                        </div>
+                    </div>
+                    <div class="col-7 offset-1">
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-1">
+                            <span>Zwischensumme</span>
+                        </div>
+                        <div class="col align-self-center">
+                            <span class="ms-3">0,00 €</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-1">
+                            <span>Versand</span>
+                        </div>
+                        <div class="col align-self-center">
+                            <span class="ms-3">4,99 €</span>
+                        </div>
+                    </div>
+                    <div class="col-7 offset-1">
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <div class="col offset-1">
+                            <span class="fw-bold">Gesamt</span>
+                        </div>
+                        <div class="col align-self-center">
+                            <span class="ms-3">4,99 €</span>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+        <script src="js/collapseCreditcard.js"></script>
+    </body>
+</html>

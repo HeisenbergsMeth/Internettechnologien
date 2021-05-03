@@ -1,0 +1,27 @@
+.logo-size {
+    width: 10rem;
+}
+
+.dropdown-menu {
+    min-width: 27vw;
+    text-align: center;
+    border: none;
+}
+
+.cart-size {
+    width: 3rem;
+}
+
+.social-size {
+    width: 1.5rem;
+}
+
+.cart-position {
+    right: 3%;
+    margin-top: 0.75rem;
+}
+
+main {
+    height: 90vh;
+    background: white;
+}
