@@ -24,9 +24,9 @@ public class AdminController extends HttpServlet {
         String newCategory = request.getParameter("newCategory");
 
         if (newCategory != null) {
-            request.getRequestDispatcher("/category").forward(request, response);
+            request.getRequestDispatcher("/category/add").forward(request, response);
         } else {
-            request.getRequestDispatcher("/book").forward(request, response);
+            request.getRequestDispatcher("/book/add").forward(request, response);
         }
     }
 }

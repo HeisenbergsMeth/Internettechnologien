@@ -1,8 +1,9 @@
 package de.falkmarinov.Internettechnologien.controller;
 
-import de.falkmarinov.Internettechnologien.model.Category;
+import de.falkmarinov.Internettechnologien.model.Book;
 import de.falkmarinov.Internettechnologien.parser.Parser;
-import de.falkmarinov.Internettechnologien.service.CategoryService;
+import de.falkmarinov.Internettechnologien.service.BookService;
+import de.falkmarinov.Internettechnologien.validator.exception.BookValidatorException;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -13,26 +14,30 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(name = "CategoryController", value = "/category")
-public class CategoryController extends HttpServlet {
+@WebServlet(name = "AddBookController", value = "/book/add")
+public class AddBookController extends HttpServlet {
 
     @Inject
-    @Named("categoryParser")
-    private Parser<Category> categoryParser;
+    @Named("bookParser")
+    private Parser<Book> bookParser;
 
     @Inject
-    private CategoryService categoryService;
+    private BookService bookService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Category category = categoryParser.parse(request);
+        Book book = bookParser.parse(request);
 
-        categoryService.addCategory(category);
-        categoryService.updateCategoriesInContext(getServletContext());
+        String message;
 
-        String message = "Kategorie hinzugefügt: " + category.getName();
+        try {
+            bookService.addBook(book);
+            message = "Buch erfolgreich hinzugefügt: " + book.getTitle();
+        } catch (BookValidatorException e) {
+            message = e.getMessage();
+        }
 
         request.setAttribute("message", message);
         request.getRequestDispatcher("/admin.jsp").forward(request, response);

@@ -1,5 +1,6 @@
 package de.falkmarinov.Internettechnologien.service;
 
+import de.falkmarinov.Internettechnologien.config.CategoryConfig;
 import de.falkmarinov.Internettechnologien.model.Category;
 import de.falkmarinov.Internettechnologien.repository.CategoryDao;
 
@@ -22,7 +23,7 @@ public class CategoryServiceImplementation implements CategoryService {
     @Override
     public void updateCategoriesInContext(ServletContext servletContext) {
         List<Category> categories = categoryDao.fetchAllCategories();
-        servletContext.setAttribute("categories", categories);
+        servletContext.setAttribute(CategoryConfig.CATEGORY_ATTR, categories);
     }
 
     @Override

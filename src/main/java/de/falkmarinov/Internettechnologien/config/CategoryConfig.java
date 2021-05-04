@@ -8,13 +8,15 @@ import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
 @WebListener
-public class CategoryConfigListener implements ServletContextListener {
+public class CategoryConfig implements ServletContextListener {
+
+    public static final String CATEGORY_ATTR = "categories";
 
     @Inject
     private CategoryService categoryService;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        sce.getServletContext().setAttribute("categories", categoryService.getAllCategories());
+        sce.getServletContext().setAttribute(CATEGORY_ATTR, categoryService.getAllCategories());
     }
 }
