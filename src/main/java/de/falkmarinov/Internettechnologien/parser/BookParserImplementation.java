@@ -6,9 +6,6 @@ import de.falkmarinov.Internettechnologien.model.Category;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 @Named("bookParser")
 @ApplicationScoped
@@ -25,7 +22,7 @@ public class BookParserImplementation implements Parser<Book> {
         String company = request.getParameter("company");
         String isbn = request.getParameter("isbn");
         Double price = Double.valueOf(request.getParameter("price").replace(",", "."));
-        String[] categories = request.getParameterValues("categories");
+        String[] categoryIds = request.getParameterValues("categories");
 
         Book book = new Book();
         book.setTitle(title);
@@ -37,9 +34,11 @@ public class BookParserImplementation implements Parser<Book> {
         book.setIsbn(isbn);
         book.setPrice(price);
 
-        if (categories != null) {
-            for (String category : categories) {
-                book.addCategory(Long.valueOf(category));
+        if (categoryIds != null) {
+            for (String ids : categoryIds) {
+                Category category = new Category();
+                category.setId(Long.valueOf(ids));
+                book.addCategory(category);
             }
         }
 

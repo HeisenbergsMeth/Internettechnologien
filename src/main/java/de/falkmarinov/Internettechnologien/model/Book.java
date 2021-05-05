@@ -14,7 +14,7 @@ public class Book {
     private String company;
     private String isbn;
     private Double price;
-    private final List<Long> categories = new LinkedList<>();
+    private final List<Category> categories = new LinkedList<>();
 
     public Long getId() {
         return id;
@@ -24,8 +24,8 @@ public class Book {
         this.id = id;
     }
 
-    public void addCategory(Long id) {
-        this.categories.add(id);
+    public void addCategory(Category category) {
+        this.categories.add(category);
     }
 
     public String getTitle() {
@@ -92,7 +92,7 @@ public class Book {
         this.price = price;
     }
 
-    public List<Long> getCategories() {
+    public List<Category> getCategories() {
         return categories;
     }
 }
