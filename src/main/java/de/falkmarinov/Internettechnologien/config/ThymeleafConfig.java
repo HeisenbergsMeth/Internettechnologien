@@ -16,7 +16,7 @@ public class ThymeleafConfig implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ServletContextTemplateResolver resolver = new ServletContextTemplateResolver(sce.getServletContext());
-        resolver.setPrefix("/WEB-INF/templates");
+        resolver.setPrefix("/WEB-INF/templates/");
         resolver.setTemplateMode(TemplateMode.HTML);
 
         TemplateEngine engine = new TemplateEngine();

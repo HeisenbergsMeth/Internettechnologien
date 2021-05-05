@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <link href="../../css/template.css" rel="stylesheet">
-    <link href="../../css/navigation.css" rel="stylesheet">
+    <link href="../../css/wrapper.css" th:href="@{/css/wrapper.css}" rel="stylesheet">
+    <link href="../../css/book.css" th:href="@{/css/book.css}" rel="stylesheet">
 
     <title>Bücher</title>
 </head>
@@ -14,11 +14,11 @@
 <header class="bg-light text-center">
     <div class="d-inline text-center">
         <a href="">
-            <img class="my-3 logo-size" src="../../assets/logo.svg" alt="LOGO">
+            <img class="my-3 logo-size" src="../../assets/logo.svg" th:src="@{/assets/logo.svg}" alt="LOGO">
         </a>
     </div>
     <div class="d-inline position-absolute cart-position">
-        <img class="btn cart-size" src="../../assets/cart.svg" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" alt="CART">
+        <img class="btn cart-size" src="../../assets/cart.svg" th:src="@{/assets/cart.svg}" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" alt="CART">
         <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
              aria-labelledby="offcanvasRightLabel">
             <div class="offcanvas-header">
@@ -35,39 +35,33 @@
 <nav class="bg-white">
     <ul class="nav nav-fill">
         <li class="nav-item dropdown">
-            <a class="nav-link text-dark" aria-current="page" href="#">Bücher</a>
+            <a class="nav-link text-dark" aria-current="page" href="">Bücher</a>
         </li>
         <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Kategorien</a>
+            <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Kategorien</a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Krimi</a></li>
-                <li><a class="dropdown-item" href="#">Roman</a></li>
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Sachbücher</a></li>
+                <li th:each="category: ${categories}"><a th:text="${category.getName()}" class="dropdown-item" href="">Kategorie</a></li>
             </ul>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Gutscheine</a>
+            <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">Gutscheine</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">FAQ</a>
+            <a class="nav-link disabled" href="" tabindex="-1" aria-disabled="true">FAQ</a>
         </li>
     </ul>
 </nav>
 <main>
-    <br><br><br>
-    <div class="container">
-        <div class="row row-cols-md-4">
-            <div class="col text-center">
-                <div class="card" style="width: 12rem;">
-                    <img src="../../assets/buch.png" class="card-img-top" alt="test">
+    <div class="container my-5">
+        <div class="row row-cols-4">
+            <div th:each="book: ${books}" class="col py-4 d-flex justify-content-center">
+                <div class="card text-center w-12rem">
+                    <img src="../../assets/buch.png" th:src="@{/assets/buch.png}" class="card-img-top" alt="Buchbild">
                     <div class="card-body">
-                        <h5 class="card-title">Der Insasse</h5>
-                        <p class="card-text">ein Psychothriller des Autors Sebastian Fitzek
-                        <br>
-                        <h6 style="color: darkblue">22,99€</h6></p>
-                        <a href="detail.html" class="btn btn-primary">zum Buch</a>
-
+                        <h5 th:text="${book.getTitle()}" class="card-title">Buchtitel</h5>
+                        <p th:text="${#strings.abbreviate(book.getDescription(), 60)}" class="card-text">Kurzbeschreibung</p>
+                        <p th:text="${#numbers.formatCurrency(book.getPrice())}" class="text-primary fw-bold">0 €</p>
+                        <a th:href="@{|/detail?id=${book.getId()}|}" href="detail.html" class="btn btn-primary">Mehr</a>
                     </div>
                 </div>
             </div>
@@ -83,13 +77,13 @@
                 </div>
                 <div class="d-flex flex-row justify-content-evenly mt-4">
                     <a class="text-decoration-none" href="">
-                        <img class="social-size" src="../../assets/instagram.svg" alt="Instagram">
+                        <img class="social-size" src="../../assets/instagram.svg" th:src="@{/assets/instagram.svg}" alt="Instagram">
                     </a>
                     <a class="text-decoration-none" href="">
-                        <img class="social-size" src="../../assets/twitter.svg" alt="Twitter">
+                        <img class="social-size" src="../../assets/twitter.svg" th:src="@{/assets/twitter.svg}" alt="Twitter">
                     </a>
                     <a class="text-decoration-none" href="">
-                        <img class="social-size" src="../../assets/facebook.svg" alt="Facebook">
+                        <img class="social-size" src="../../assets/facebook.svg" th:src="@{/assets/facebook.svg}" alt="Facebook">
                     </a>
                 </div>
             </div>

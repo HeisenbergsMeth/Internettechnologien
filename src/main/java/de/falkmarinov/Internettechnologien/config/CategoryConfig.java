@@ -1,6 +1,6 @@
 package de.falkmarinov.Internettechnologien.config;
 
-import de.falkmarinov.Internettechnologien.service.CategoryService;
+import de.falkmarinov.Internettechnologien.service.AddCategoryService;
 
 import javax.inject.Inject;
 import javax.servlet.ServletContextEvent;
@@ -13,7 +13,7 @@ public class CategoryConfig implements ServletContextListener {
     public static final String CATEGORY_ATTR = "categories";
 
     @Inject
-    private CategoryService categoryService;
+    private AddCategoryService categoryService;
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
