@@ -3,9 +3,12 @@ package de.falkmarinov.Internettechnologien.controller;
 import de.falkmarinov.Internettechnologien.config.ThymeleafConfig;
 import de.falkmarinov.Internettechnologien.model.Book;
 import de.falkmarinov.Internettechnologien.model.Category;
+import de.falkmarinov.Internettechnologien.service.BookService;
+import de.falkmarinov.Internettechnologien.service.CategoryService;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.WebContext;
 
+import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
@@ -16,6 +19,12 @@ import java.util.List;
 @WebServlet(name = "BookController", value = "/book")
 public class BookController extends HttpServlet {
 
+    @Inject
+    private CategoryService categoryService;
+
+    @Inject
+    private BookService bookService;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -23,8 +32,8 @@ public class BookController extends HttpServlet {
         WebContext context = new WebContext(request, response, request.getServletContext());
         TemplateEngine engine = (TemplateEngine) request.getServletContext().getAttribute(ThymeleafConfig.TEMPLATE_ENGINE_ATTR);
 
-        context.setVariable("categories", generateCategoryDemo());
-        context.setVariable("books", generateBookDemo());
+        context.setVariable("categories", categoryService.getAllCategories());
+        context.setVariable("books", bookService.getAllBooks());
 
         response.setCharacterEncoding("UTF-8");
 

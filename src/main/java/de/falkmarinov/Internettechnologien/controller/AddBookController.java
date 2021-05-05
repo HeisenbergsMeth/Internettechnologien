@@ -2,7 +2,7 @@ package de.falkmarinov.Internettechnologien.controller;
 
 import de.falkmarinov.Internettechnologien.model.Book;
 import de.falkmarinov.Internettechnologien.parser.Parser;
-import de.falkmarinov.Internettechnologien.service.AddBookService;
+import de.falkmarinov.Internettechnologien.service.BookService;
 import de.falkmarinov.Internettechnologien.validator.exception.BookValidatorException;
 
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ public class AddBookController extends HttpServlet {
     private Parser<Book> bookParser;
 
     @Inject
-    private AddBookService bookService;
+    private BookService bookService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

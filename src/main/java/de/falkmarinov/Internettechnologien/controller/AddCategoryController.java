@@ -2,7 +2,7 @@ package de.falkmarinov.Internettechnologien.controller;
 
 import de.falkmarinov.Internettechnologien.model.Category;
 import de.falkmarinov.Internettechnologien.parser.Parser;
-import de.falkmarinov.Internettechnologien.service.AddCategoryService;
+import de.falkmarinov.Internettechnologien.service.CategoryService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -21,7 +21,7 @@ public class AddCategoryController extends HttpServlet {
     private Parser<Category> categoryParser;
 
     @Inject
-    private AddCategoryService categoryService;
+    private CategoryService categoryService;
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

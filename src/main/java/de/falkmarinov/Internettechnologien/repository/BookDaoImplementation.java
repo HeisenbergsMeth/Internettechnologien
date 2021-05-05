@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @ApplicationScoped
@@ -70,5 +71,23 @@ public class BookDaoImplementation implements BookDao {
                 MARIADB.executeUpdate(sql, DATABASE);
             }
         }
+    }
+
+    @Override
+    public List<Book> fetchAllBooks() {
+        String sql = "SELECT * FROM Buch";
+
+        ResultSet resultSet = MARIADB.executeQuery(sql, DATABASE);
+
+        List<Book> books = new ArrayList<>();
+
+        try {
+            while(resultSet.next()) {
+                
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+        return null;
     }
 }

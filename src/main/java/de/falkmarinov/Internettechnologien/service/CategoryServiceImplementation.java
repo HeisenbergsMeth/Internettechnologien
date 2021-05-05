@@ -10,7 +10,7 @@ import javax.servlet.ServletContext;
 import java.util.List;
 
 @ApplicationScoped
-public class AddCategoryServiceImplementation implements AddCategoryService {
+public class CategoryServiceImplementation implements CategoryService {
 
     @Inject
     private CategoryDao categoryDao;

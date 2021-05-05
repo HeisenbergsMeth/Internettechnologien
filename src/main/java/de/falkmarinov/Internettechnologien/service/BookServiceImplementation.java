@@ -7,9 +7,10 @@ import de.falkmarinov.Internettechnologien.validator.exception.BookValidatorExce
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import java.util.List;
 
 @ApplicationScoped
-public class AddBookServiceImplementation implements AddBookService {
+public class BookServiceImplementation implements BookService {
 
     @Inject
     private BookDao bookDao;
@@ -20,5 +21,10 @@ public class AddBookServiceImplementation implements AddBookService {
     public void addBook(Book book) throws BookValidatorException {
         bookValidator.validate(book);
         bookDao.insertBook(book);
+    }
+
+    @Override
+    public List<Book> getAllBooks() {
+        return bookDao.fetchAllBooks();
     }
 }
