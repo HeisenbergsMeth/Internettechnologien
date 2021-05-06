@@ -22,8 +22,38 @@ public class BookDao implements Dao<Book> {
     private DatabaseConnection MARIADB;
 
     @Override
-    public Optional<Book> get(int id) {
-        return Optional.empty();
+    public Optional<Book> get(Long id) {
+        String sql = String.format(
+                "SELECT * " +
+                        "FROM Buch B, Warengruppe_Buch_beinhaltet WBB, Warengruppe W " +
+                        "WHERE B.BuchID = %d AND WBB.BuchID = B.BuchID AND WBB.WarengruppeID = W.WarengruppeID;",
+                id
+        );
+
+        ResultSet resultSet = MARIADB.executeQuery(sql, "quickbook");
+
+        try {
+            if (!resultSet.next()) {
+                return Optional.empty();
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        Book book = parseToBook(resultSet);
+
+        try {
+            do {
+                Category category = new Category();
+                category.setId(resultSet.getLong("W.WarengruppeID"));
+                category.setName(resultSet.getString("Bezeichnung"));
+                book.addCategory(category);
+            } while (resultSet.next());
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return Optional.of(book);
     }
 
     @Override
@@ -36,27 +66,7 @@ public class BookDao implements Dao<Book> {
 
         try {
             while (resultSet.next()) {
-                Long bookId = resultSet.getLong("BuchID");
-                String author = resultSet.getString("Autor");
-                String title = resultSet.getString("Titel");
-                String description = resultSet.getString("Beschreibung");
-                Integer edition = resultSet.getInt("Auflage");
-                String date = resultSet.getString("Erscheinungsdatum");
-                String company = resultSet.getString("Verlag");
-                String isbn = resultSet.getString("ISBN");
-                Double price = resultSet.getDouble("Preis");
-
-                Book book = new Book();
-                book.setId(bookId);
-                book.setAuthor(author);
-                book.setTitle(title);
-                book.setDescription(description);
-                book.setEdition(edition);
-                book.setDate(date);
-                book.setCompany(company);
-                book.setIsbn(isbn);
-                book.setPrice(price);
-
+                Book book = parseToBook(resultSet);
                 books.add(book);
             }
 
@@ -147,5 +157,35 @@ public class BookDao implements Dao<Book> {
     @Override
     public int delete(Book book) {
         return 0;
+    }
+
+    private Book parseToBook(ResultSet resultSet) {
+        Book book = new Book();
+
+        try {
+            Long bookId = resultSet.getLong("BuchID");
+            String author = resultSet.getString("Autor");
+            String title = resultSet.getString("Titel");
+            String description = resultSet.getString("Beschreibung");
+            Integer edition = resultSet.getInt("Auflage");
+            String date = resultSet.getString("Erscheinungsdatum");
+            String company = resultSet.getString("Verlag");
+            String isbn = resultSet.getString("ISBN");
+            Double price = resultSet.getDouble("Preis");
+
+            book.setId(bookId);
+            book.setAuthor(author);
+            book.setTitle(title);
+            book.setDescription(description);
+            book.setEdition(edition);
+            book.setDate(date);
+            book.setCompany(company);
+            book.setIsbn(isbn);
+            book.setPrice(price);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
+
+        return book;
     }
 }

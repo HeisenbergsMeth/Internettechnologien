@@ -9,8 +9,10 @@ import de.falkmarinov.Internettechnologien.validator.exception.BookValidatorExce
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.ws.rs.NotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @ApplicationScoped
 public class BookServiceImplementation implements BookService {
@@ -45,6 +47,12 @@ public class BookServiceImplementation implements BookService {
         }
 
         return filteredBooks;
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        return bookDao.get(id)
+                .orElseThrow(NotFoundException::new);
     }
 
     private boolean bookContainsCategoryId(Book book, Long id) {

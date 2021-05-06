@@ -21,7 +21,7 @@ public class CategoryDao implements Dao<Category> {
     private DatabaseConnection MARIADB;
 
     @Override
-    public Optional<Category> get(int id) {
+    public Optional<Category> get(Long id) {
         return Optional.empty();
     }
 
