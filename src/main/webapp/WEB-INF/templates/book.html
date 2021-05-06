@@ -35,12 +35,12 @@
 <nav class="bg-white">
     <ul class="nav nav-fill">
         <li class="nav-item dropdown">
-            <a class="nav-link text-dark" aria-current="page" href="">Bücher</a>
+            <a class="nav-link text-dark" aria-current="page" href="" th:href="@{/book}">Bücher</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Kategorien</a>
             <ul class="dropdown-menu">
-                <li th:each="category: ${categories}"><a th:text="${category.getName()}" class="dropdown-item" href="">Kategorie</a></li>
+                <li th:each="category: ${categories}"><a th:text="${category.getName()}" class="dropdown-item" href="" th:href="@{|/book?c=${category.getId()}|}">Kategorie</a></li>
             </ul>
         </li>
         <li class="nav-item">

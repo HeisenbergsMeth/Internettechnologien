@@ -1,6 +1,7 @@
 package de.falkmarinov.Internettechnologien.service;
 
 import de.falkmarinov.Internettechnologien.model.Book;
+import de.falkmarinov.Internettechnologien.model.Category;
 import de.falkmarinov.Internettechnologien.repository.Dao;
 import de.falkmarinov.Internettechnologien.validator.BookValidator;
 import de.falkmarinov.Internettechnologien.validator.exception.BookValidatorException;
@@ -30,5 +31,33 @@ public class BookServiceImplementation implements BookService {
     @Override
     public List<Book> getAllBooks() {
         return (ArrayList<Book>) bookDao.getAll();
+    }
+
+    @Override
+    public List<Book> getBooksByCategoryId(Long id) {
+        List<Book> allBooks = getAllBooks();
+        List<Book> filteredBooks = new ArrayList<>();
+
+        for (Book book : allBooks) {
+            if (bookContainsCategoryId(book, id)) {
+                filteredBooks.add(book);
+            }
+        }
+
+        return filteredBooks;
+    }
+
+    private boolean bookContainsCategoryId(Book book, Long id) {
+        List<Category> categories = book.getCategories();
+
+        if (categories.size() > 0) {
+            for (Category category : categories) {
+                if (category.getId().equals(id)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

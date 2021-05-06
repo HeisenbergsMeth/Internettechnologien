@@ -1,8 +1,6 @@
 package de.falkmarinov.Internettechnologien.controller;
 
 import de.falkmarinov.Internettechnologien.config.ThymeleafConfig;
-import de.falkmarinov.Internettechnologien.model.Book;
-import de.falkmarinov.Internettechnologien.model.Category;
 import de.falkmarinov.Internettechnologien.service.BookService;
 import de.falkmarinov.Internettechnologien.service.CategoryService;
 import org.thymeleaf.TemplateEngine;
@@ -15,8 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(name = "BookController", value = "/book")
 public class BookController extends HttpServlet {
@@ -35,7 +31,14 @@ public class BookController extends HttpServlet {
         TemplateEngine engine = (TemplateEngine) request.getServletContext().getAttribute(ThymeleafConfig.TEMPLATE_ENGINE_ATTR);
 
         context.setVariable("categories", categoryService.getAllCategories());
-        context.setVariable("books", bookService.getAllBooks());
+
+        String categoryId = request.getParameter("c");
+
+        if (categoryId == null) {
+            context.setVariable("books", bookService.getAllBooks());
+        } else {
+            context.setVariable("books", bookService.getBooksByCategoryId(Long.valueOf(categoryId)));
+        }
 
         response.setCharacterEncoding("UTF-8");
 

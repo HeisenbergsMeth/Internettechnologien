@@ -10,4 +10,6 @@ public interface BookService {
     void addBook(Book book) throws BookValidatorException;
 
     List<Book> getAllBooks();
+
+    List<Book> getBooksByCategoryId(Long id);
 }
