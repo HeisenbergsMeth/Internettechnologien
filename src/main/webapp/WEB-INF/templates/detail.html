@@ -13,7 +13,7 @@
 <body>
 <header class="bg-light text-center">
     <div class="d-inline text-center">
-        <a href="">
+        <a href="" th:href="@{/book}">
             <img class="my-3 logo-size" src="../../assets/logo.svg" th:src="@{/assets/logo.svg}" alt="LOGO">
         </a>
     </div>
@@ -55,7 +55,7 @@
     <div class="container my-5">
         <div class="row">
             <div class="col">
-                <img src="../../assets/buch.png" class="w-15rem" alt="...">
+                <img src="../../assets/buch.png" th:src="@{/assets/buch.png}" class="w-15rem" alt="...">
             </div>
 
             <div class="col-6">
@@ -75,7 +75,7 @@
             </div>
         </div>
 
-        <hr>
+        <hr class="my-5">
 
         <div class="row">
             <div class="col">

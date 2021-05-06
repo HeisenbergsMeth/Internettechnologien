@@ -24,9 +24,7 @@ public class BookDao implements Dao<Book> {
     @Override
     public Optional<Book> get(Long id) {
         String sql = String.format(
-                "SELECT * " +
-                        "FROM Buch B, Warengruppe_Buch_beinhaltet WBB, Warengruppe W " +
-                        "WHERE B.BuchID = %d AND WBB.BuchID = B.BuchID AND WBB.WarengruppeID = W.WarengruppeID;",
+                "SELECT * FROM Buch WHERE BuchID = %d",
                 id
         );
 
@@ -41,17 +39,7 @@ public class BookDao implements Dao<Book> {
         }
 
         Book book = parseToBook(resultSet);
-
-        try {
-            do {
-                Category category = new Category();
-                category.setId(resultSet.getLong("W.WarengruppeID"));
-                category.setName(resultSet.getString("Bezeichnung"));
-                book.addCategory(category);
-            } while (resultSet.next());
-        } catch (SQLException exception) {
-            exception.printStackTrace();
-        }
+        fillCategories(book);
 
         return Optional.of(book);
     }
@@ -71,21 +59,7 @@ public class BookDao implements Dao<Book> {
             }
 
             for (Book book : books) {
-                sql = String.format(
-                        "SELECT W.WarengruppeID, Bezeichnung " +
-                                "FROM Warengruppe_Buch_beinhaltet WBB, Warengruppe W " +
-                                "WHERE WBB.BuchID = %d AND WBB.WarengruppeID = W.WarengruppeID",
-                        book.getId()
-                );
-
-                resultSet = MARIADB.executeQuery(sql, "quickbook");
-
-                while (resultSet.next()) {
-                    Category category = new Category();
-                    category.setId(resultSet.getLong("W.WarengruppeID"));
-                    category.setName(resultSet.getString("Bezeichnung"));
-                    book.addCategory(category);
-                }
+                fillCategories(book);
             }
         } catch (SQLException exception) {
             exception.printStackTrace();
@@ -187,5 +161,27 @@ public class BookDao implements Dao<Book> {
         }
 
         return book;
+    }
+
+    private void fillCategories(Book book) {
+        String sql = String.format(
+                "SELECT W.WarengruppeID, Bezeichnung " +
+                        "FROM Warengruppe_Buch_beinhaltet WBB, Warengruppe W " +
+                        "WHERE WBB.BuchID = %d AND WBB.WarengruppeID = W.WarengruppeID",
+                book.getId()
+        );
+
+        ResultSet resultSet = MARIADB.executeQuery(sql, "quickbook");
+
+        try {
+            while (resultSet.next()) {
+                Category category = new Category();
+                category.setId(resultSet.getLong("W.WarengruppeID"));
+                category.setName(resultSet.getString("Bezeichnung"));
+                book.addCategory(category);
+            }
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }
     }
 }

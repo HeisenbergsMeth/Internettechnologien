@@ -1,7 +1,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="de.falkmarinov.Internettechnologien.model.Category" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" %>
 <html lang="de">
 <head>
     <meta charset="utf-8">
@@ -16,7 +16,7 @@
     <body>
         <header class="bg-light text-center">
             <div class="d-inline text-center">
-                <a href="">
+                <a href="book">
                     <img class="my-3 logo-size" src="assets/logo.svg" alt="LOGO">
                 </a>
             </div>
