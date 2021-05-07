@@ -40,8 +40,6 @@ public class BooksController extends HttpServlet {
             context.setVariable("books", bookService.getBooksByCategoryId(Long.valueOf(categoryId)));
         }
 
-        response.setCharacterEncoding("UTF-8");
-
         engine.process("book.html", context, response.getWriter());
     }
 }

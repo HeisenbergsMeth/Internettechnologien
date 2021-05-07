@@ -40,8 +40,6 @@ public class DetailController extends HttpServlet {
         Book book = bookService.getBookById(bookId);
         context.setVariable("book", book);
 
-        response.setCharacterEncoding("UTF-8");
-
         engine.process("detail.html", context, response.getWriter());
     }
 }
