@@ -40,7 +40,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Kategorien</a>
             <ul class="dropdown-menu">
-                <li th:each="category: ${categories}"><a th:text="${category.getName()}" class="dropdown-item" href="" th:href="@{|/book?c=${category.getId()}|}">Kategorie</a></li>
+                <li th:each="category: ${categories}"><a th:text="${category.name}" class="dropdown-item" href="" th:href="@{|/book?c=${category.id}|}">Kategorie</a></li>
             </ul>
         </li>
         <li class="nav-item">
@@ -58,10 +58,10 @@
                 <div class="card text-center w-12rem">
                     <img src="../../assets/buch.png" th:src="@{/assets/buch.png}" class="card-img-top" alt="Buchbild">
                     <div class="card-body">
-                        <h5 th:text="${book.getTitle()}" class="card-title">Buchtitel</h5>
-                        <p th:text="${#strings.abbreviate(book.getDescription(), 60)}" class="card-text">Kurzbeschreibung</p>
-                        <p th:text="${#numbers.formatCurrency(book.getPrice())}" class="text-primary fw-bold">0 €</p>
-                        <a th:href="@{|/detail?id=${book.getId()}|}" href="detail.html" class="btn btn-primary">Mehr</a>
+                        <h5 th:text="${book.title}" class="card-title">Buchtitel</h5>
+                        <p th:text="${#strings.abbreviate(book.description, 60)}" class="card-text">Kurzbeschreibung</p>
+                        <p th:text="${#numbers.formatCurrency(book.price)}" class="text-primary fw-bold">0 €</p>
+                        <a th:href="@{|/detail?id=${book.id}|}" href="detail.html" class="btn btn-primary">Mehr</a>
                     </div>
                 </div>
             </div>

@@ -40,7 +40,7 @@
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="" role="button" aria-expanded="false">Kategorien</a>
             <ul class="dropdown-menu">
-                <li th:each="category: ${categories}"><a th:text="${category.getName()}" class="dropdown-item" href="" th:href="@{|/book?c=${category.getId()}|}">Kategorie</a></li>
+                <li th:each="category: ${categories}"><a th:text="${category.name}" class="dropdown-item" href="" th:href="@{|/book?c=${category.id}|}">Kategorie</a></li>
             </ul>
         </li>
         <li class="nav-item">
@@ -59,13 +59,13 @@
             </div>
 
             <div class="col-6">
-                <h5 th:text="${book.getTitle()}">Titel</h5>
-                <p>von <span th:text="${book.getAuthor()}">Autor</span></p>
-                <p  th:text="${book.getDescription()}">Beschreibung</p>
+                <h5 th:text="${book.title}">Titel</h5>
+                <p>von <span th:text="${book.author}">Autor</span></p>
+                <p  th:text="${book.description}">Beschreibung</p>
             </div>
 
             <div class="col">
-                <h1 th:text="${#numbers.formatCurrency(book.getPrice())}" class="text-primary fw-bold">0 €</h1>
+                <h1 th:text="${#numbers.formatCurrency(book.price)}" class="text-primary fw-bold">0 €</h1>
                 <p>inkl. gesetzl. MwSt.</p>
                 <p class="text-primary fw-bold">Sofort lieferbar</p>
                 <p class="text-primary fw-bold">Versandkostenfrei</p>
@@ -82,11 +82,11 @@
                 <table style="width:100%">
                     <tr>
                         <th>Erscheinungsdatum</th>
-                        <td th:text="${book.getDate()}">YYYY-MM-DD</td>
+                        <td th:text="${book.date}">YYYY-MM-DD</td>
                     </tr>
                     <tr>
                         <th>ISBN</th>
-                        <td th:text="${book.getIsbn()}">000000000</td>
+                        <td th:text="${book.isbn}">000000000</td>
                     </tr>
                 </table>
             </div>
@@ -94,11 +94,11 @@
                 <table style="width:100%">
                     <tr>
                         <th>Verlag</th>
-                        <td th:text="${book.getCompany()}">Verlag</td>
+                        <td th:text="${book.company}">Verlag</td>
                     </tr>
                     <tr>
                         <th>Auflage</th>
-                        <td th:text="${book.getEdition()}">Auflage</td>
+                        <td th:text="${book.edition}">Auflage</td>
                     </tr>
                 </table>
             </div>
