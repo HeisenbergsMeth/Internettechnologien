@@ -1,11 +1,9 @@
-.w-15rem{
+.w-15rem {
     width: 15rem;
 }
 
 hr {
     width: 40%;
     color: lightgrey;
-    margin: 0 auto;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin: 3rem auto;
 }

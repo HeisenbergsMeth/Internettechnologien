@@ -5,7 +5,7 @@ function collapse() {
 
     let classes = cardInfos.className;
 
-    if(classes.includes("collapse")) {
+    if (classes.includes("collapse")) {
         cardInfos.classList.remove("collapse");
     } else {
         cardInfos.classList.add("collapse");

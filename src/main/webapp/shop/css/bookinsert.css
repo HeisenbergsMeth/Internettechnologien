@@ -2,7 +2,7 @@
     width: 10rem;
 }
 
-.conbox{
+.conbox {
     width: 50%;
     margin-top: 5%;
     margin-bottom: 3%;
@@ -13,4 +13,6 @@
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.15);
 }
 
-a { text-decoration: none; }
+a {
+    text-decoration: none;
+}
