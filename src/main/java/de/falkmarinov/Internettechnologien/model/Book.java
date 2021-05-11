@@ -14,6 +14,7 @@ public class Book {
     private String company;
     private String isbn;
     private Double price;
+    private String picture;
     private final List<Category> categories = new LinkedList<>();
 
     public Long getId() {
@@ -90,6 +91,14 @@ public class Book {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public List<Category> getCategories() {

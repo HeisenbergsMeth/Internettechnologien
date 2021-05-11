@@ -82,7 +82,7 @@ public class BookDao implements Dao<Book> {
         List<Category> categories = book.getCategories();
 
         String sql = String.format(
-                "INSERT INTO Buch VALUES (0, '%s', '%s', '%s', %d, '%s', '%s', '%s', %s)",
+                "INSERT INTO Buch VALUES (0, '%s', '%s', '%s', %d, '%s', '%s', '%s', %s, null)",
                 author,
                 title,
                 description,
@@ -146,6 +146,7 @@ public class BookDao implements Dao<Book> {
             String company = resultSet.getString("Verlag");
             String isbn = resultSet.getString("ISBN");
             Double price = resultSet.getDouble("Preis");
+            String picture = resultSet.getString("Bild");
 
             book.setId(bookId);
             book.setAuthor(author);
@@ -156,6 +157,7 @@ public class BookDao implements Dao<Book> {
             book.setCompany(company);
             book.setIsbn(isbn);
             book.setPrice(price);
+            book.setPicture(picture);
         } catch (SQLException exception) {
             exception.printStackTrace();
         }

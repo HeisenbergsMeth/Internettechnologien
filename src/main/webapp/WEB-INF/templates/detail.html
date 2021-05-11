@@ -13,13 +13,13 @@
     <title>Quickbook - Buchdetail</title>
 </head>
 <body>
-<header th:replace="fragments/navbar.html :: navbar"></header>
+<header th:replace="fragments/header.html :: header"></header>
 <nav th:replace="fragments/navbar.html :: navbar"></nav>
 <main>
     <div class="container my-5">
         <div class="row">
             <div class="col">
-                <img alt="..." class="w-15rem" src="../../assets/buch.png" th:src="@{/assets/buch.png}">
+                <img alt="Cover" class="mw-100" src="../../assets/buch.png" th:src="${book.picture}">
             </div>
 
             <div class="col-6">
