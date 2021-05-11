@@ -1,6 +1,7 @@
 package de.falkmarinov.Internettechnologien.controller;
 
 import de.falkmarinov.Internettechnologien.config.ThymeleafConfig;
+import de.falkmarinov.Internettechnologien.model.ShoppingCart;
 import de.falkmarinov.Internettechnologien.service.BookService;
 import de.falkmarinov.Internettechnologien.service.CategoryService;
 import org.thymeleaf.TemplateEngine;
@@ -23,6 +24,9 @@ public class BooksController extends HttpServlet {
     @Inject
     private BookService bookService;
 
+    @Inject
+    private ShoppingCart shoppingCart;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,6 +35,7 @@ public class BooksController extends HttpServlet {
         TemplateEngine engine = (TemplateEngine) request.getServletContext().getAttribute(ThymeleafConfig.TEMPLATE_ENGINE_ATTR);
 
         context.setVariable("categories", categoryService.getAllCategories());
+        context.setVariable("shoppingCartSize", shoppingCart.getPositionsEntryList().size());
 
         String categoryId = request.getParameter("c");
 

@@ -15,12 +15,17 @@
     <a href="../book.html" th:href="@{/book}">
         <img alt="LOGO" class="my-3 logo-size" src="../../../assets/logo.svg" th:src="@{/assets/logo.svg}">
     </a>
-    <a class="align-self-center position-absolute cart-position" href="" th:href="@{/shoppingCart.xhtml}">
-        <img alt="CART" class="my-3 cart-size" src="../../../assets/cart.svg" th:src="@{/assets/cart.svg}">
-    </a>
-    <a class="align-self-center position-absolute add-book-position" href="" th:href="@{/admin}">
-        <img alt="CART" class="my-3 cart-size" src="../../../assets/add-book.svg" th:src="@{/assets/add-book.svg}">
-    </a>
+    <div class="row align-self-center position-absolute icon-position">
+        <a class="col" href="" th:href="@{/admin}">
+            <img alt="CART" class="my-3 cart-size" src="../../../assets/add-book.svg" th:src="@{/assets/add-book.svg}">
+        </a>
+        <div class="col">
+            <a href="" th:href="@{/shoppingCart.xhtml}">
+                <img alt="CART" class="position-relative my-3 cart-size" src="../../../assets/cart.svg" th:src="@{/assets/cart.svg}">
+                <span th:text="${shoppingCartSize}" class="position-absolute badge rounded-pill bg-primary badge-position">0</span>
+            </a>
+        </div>
+    </div>
 </header>
 </body>
 </html>
