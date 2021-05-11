@@ -6,10 +6,11 @@
     width: 1.5rem;
 }
 
-.cart-position {
+.icon-position {
     right: 1.5%;
 }
 
-.add-book-position {
-    right: 3.75%;
+.badge-position {
+    top: 5px;
+    right: 3px;
 }
