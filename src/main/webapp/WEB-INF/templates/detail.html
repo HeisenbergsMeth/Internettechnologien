@@ -34,9 +34,7 @@
                 <p class="text-primary fw-bold">Sofort lieferbar</p>
                 <p class="text-primary fw-bold">Versandkostenfrei</p>
                 <div class="d-grid gap-2 mx-auto">
-                    <button aria-controls="offcanvasRight" class="btn btn-primary" data-bs-target="#offcanvasRight"
-                            data-bs-toggle="offcanvas" type="button">In den Warenkorb
-                    </button>
+                    <a class="btn btn-primary" href="" th:href="@{|/shoppingCart.xhtml?id=${book.id}|}">In den Warenkorb</a>
                 </div>
             </div>
         </div>
