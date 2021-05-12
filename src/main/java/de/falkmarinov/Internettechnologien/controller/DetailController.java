@@ -40,7 +40,7 @@ public class DetailController extends HttpServlet {
         List<Category> categories = categoryService.getAllCategories();
         context.setVariable("categories", categories);
 
-        context.setVariable("shoppingCartSize", shoppingCart.getPositionMapEntry().size());
+        context.setVariable("shoppingCartSize", shoppingCart.getPositionEntryList().size());
 
         Long bookId = Long.valueOf(request.getParameter("id"));
         Book book = bookService.getBookById(bookId);

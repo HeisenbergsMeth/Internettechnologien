@@ -37,7 +37,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <p:repeat value="#{shoppingCart.positionMapEntry}" var="position">
+                    <p:repeat value="#{shoppingCart.positionEntryList}" var="position">
                         <tr>
                             <td><img class="book-size" src="${shoppingCart.getBook(position.key).picture}" alt="Cover"/>
                             </td>

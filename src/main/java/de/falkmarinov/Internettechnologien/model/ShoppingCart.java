@@ -50,7 +50,7 @@ public class ShoppingCart implements Serializable {
         decreaseTotal(id);
     }
 
-    public List<Entry<Long, Integer>> getPositionMapEntry() {
+    public List<Entry<Long, Integer>> getPositionEntryList() {
         return new ArrayList<>(positions.entrySet());
     }
 
@@ -77,14 +77,12 @@ public class ShoppingCart implements Serializable {
     }
 
     private void increaseTotal(Long id) {
-        Optional<Book> optionalBook = bookDao.get(id);
-        Book book = optionalBook.orElseThrow(NotFoundException::new);
+        Book book = getBook(id);
         total += book.getPrice();
     }
 
     private void decreaseTotal(Long id) {
-        Optional<Book> optionalBook = bookDao.get(id);
-        Book book = optionalBook.orElseThrow(NotFoundException::new);
+        Book book = getBook(id);
         total -= book.getPrice();
     }
 }

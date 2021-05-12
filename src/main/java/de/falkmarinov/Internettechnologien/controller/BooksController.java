@@ -35,7 +35,7 @@ public class BooksController extends HttpServlet {
         TemplateEngine engine = (TemplateEngine) request.getServletContext().getAttribute(ThymeleafConfig.TEMPLATE_ENGINE_ATTR);
 
         context.setVariable("categories", categoryService.getAllCategories());
-        context.setVariable("shoppingCartSize", shoppingCart.getPositionMapEntry().size());
+        context.setVariable("shoppingCartSize", shoppingCart.getPositionEntryList().size());
 
         String categoryId = request.getParameter("c");
 
