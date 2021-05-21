@@ -2,6 +2,7 @@ package de.falkmarinov.Internettechnologien.model;
 
 import de.falkmarinov.Internettechnologien.repository.Dao;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -30,6 +31,10 @@ public class ShoppingCart implements Serializable {
             positions.put(id, 1);
             increaseTotal(id);
         }
+    }
+
+    public void removeBook(Long id) {
+        positions.remove(id);
     }
 
     public void increaseAmount(Long id) {

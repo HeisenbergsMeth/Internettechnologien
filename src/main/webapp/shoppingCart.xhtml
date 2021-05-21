@@ -55,6 +55,9 @@
                                 <h:commandButton styleClass="btn btn-primary" value="+"
                                                  action="#{shoppingCart.increaseAmount(position.key)}"
                                                  update="list"/>
+                                <h:commandButton styleClass="ms-3 btn btn-outline-danger" style="width: 3rem" image="assets/trash.svg"
+                                                 action="#{shoppingCart.removeBook(position.key)}"
+                                                 update="list"/>
                             </td>
                             <td>
                                 <h:outputText value="${shoppingCart.getBook(position.key).price * position.value}">
