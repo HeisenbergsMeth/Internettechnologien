@@ -17,8 +17,13 @@
     </a>
     <div class="row align-self-center position-absolute icon-position">
         <a class="col" href="" th:href="@{/admin}">
-            <img alt="CART" class="my-3 cart-size" src="../../../assets/add-book.svg" th:src="@{/assets/add-book.svg}">
+            <img alt="+" class="my-3 cart-size" src="../../../assets/add-book.svg" th:src="@{/assets/add-book.svg}">
         </a>
+        <div class="col">
+            <a href="" th:href="@{/user.xhtml}">
+                <img alt="PERSON" class="position-relative my-3 cart-size" src="../../../assets/person.svg" th:src="@{/assets/person.svg}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="test@test.de" th:title="${loggedInCustomer.email}">
+            </a>
+        </div>
         <div class="col">
             <a href="" th:href="@{/shoppingCart.xhtml}">
                 <img alt="CART" class="position-relative my-3 cart-size" src="../../../assets/cart.svg" th:src="@{/assets/cart.svg}">

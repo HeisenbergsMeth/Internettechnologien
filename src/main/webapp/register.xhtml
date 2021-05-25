@@ -5,6 +5,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
 >
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -20,15 +21,66 @@
     </ui:insert>
     <div class="container d-flex justify-content-center">
         <h:form styleClass="w-50 mt-5">
+            <p:growl showDetail="false"/>
             <h5>Vorname</h5>
-            <h:inputText styleClass="form-control" type="text" value="#{registrationHandler.name}" required="true"/>
+            <h:inputText id="name"
+                         styleClass="form-control"
+                         type="text"
+                         value="#{registrationHandler.name}"
+                         required="true"
+                         requiredMessage="Bitte einen Vornamen eingeben"
+                         validatorMessage="Darf nur folgendes beinhalten: A-Z a-z Leerzeichen Umlaute">
+
+                <f:validateRegex pattern="^[A-Za-zäöüÄÖÜß ]*$"/>
+
+            </h:inputText>
+            <h:message for="name" styleClass="text-danger"/>
+
             <h5 class="mt-3">Nachname</h5>
-            <h:inputText styleClass="form-control" type="text" value="#{registrationHandler.surname}" required="true"/>
+            <h:inputText id="surname"
+                         styleClass="form-control"
+                         type="text" value="#{registrationHandler.surname}"
+                         required="true"
+                         requiredMessage="Bitte einen Nachnamen eingeben"
+                         validatorMessage="Darf nur folgendes beinhalten: A-Z a-z Leerzeichen Umlaute">
+
+                <f:validateRegex pattern="^[A-Za-zäöüÄÖÜß ]*$"/>
+
+            </h:inputText>
+            <h:message for="surname" styleClass="text-danger"/>
+
             <h5 class="mt-3">Email</h5>
-            <h:inputText id="email" styleClass="form-control" type="email" value="#{registrationHandler.email}" required="true"/>
+            <h:inputText id="email"
+                         styleClass="form-control"
+                         type="email"
+                         value="#{registrationHandler.email}"
+                         required="true"
+                         requiredMessage="Bitte eine Email eingeben"
+                         validatorMessage="Bitte eine gültige Email eingeben">
+
+                <f:validateRegex
+                        pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$"/>
+
+            </h:inputText>
+            <h:message for="email" styleClass="text-danger"/>
+
             <h5 class="mt-3">Passwort</h5>
-            <h:inputSecret styleClass="form-control" type="password" value="#{registrationHandler.password}" required="true"/>
-            <h:commandButton styleClass="mt-3 btn btn-primary w-100" value="Registrieren" action="#{registrationHandler.register}"/>
+            <h:inputSecret id="password"
+                           styleClass="form-control"
+                           type="password"
+                           value="#{registrationHandler.password}"
+                           required="true"
+                           requiredMessage="Bitte ein Passwort eingeben"
+                           validatorMessage="Das Passwort muss mindestens 8 Zeichen lang sein">
+
+                <f:validateLength minimum="8"/>
+
+            </h:inputSecret>
+            <h:message for="password" styleClass="text-danger"/>
+
+            <h:commandButton styleClass="mt-3 btn btn-primary w-100"
+                             value="Registrieren"
+                             action="#{registrationHandler.register}"/>
         </h:form>
     </div>
 </f:view>

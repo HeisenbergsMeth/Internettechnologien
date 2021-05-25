@@ -1,41 +1,57 @@
 package de.falkmarinov.Internettechnologien.handler;
 
 import de.falkmarinov.Internettechnologien.model.Customer;
-import de.falkmarinov.Internettechnologien.repository.Dao;
+import de.falkmarinov.Internettechnologien.repository.CustomerDao;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
 import java.io.Serializable;
 
 @Named("registrationHandler")
 @RequestScoped
-public class RegistrationHandler  implements Serializable {
+public class RegistrationHandler implements Serializable {
 
     @Inject
     @Named("customerDao")
-    private Dao<Customer> customerDao;
+    private CustomerDao customerDao;
 
     private String name;
     private String surname;
     private String email;
     private String password;
 
-    public void register() {
-        Customer customer = new Customer();
-        customer.setName(name);
-        customer.setSurname(surname);
-        customer.setEmail(email);
-        customer.setPassword(password);
+    public String register() {
+        boolean exist = customerDao.findUserByEmail(email).isPresent();
 
-        reset();
+        if (exist) {
+            sendMessage(FacesMessage.SEVERITY_ERROR, "Email wird bereits verwendet", "");
+            return "register.xhtml";
+        } else {
+            Customer customer = new Customer();
+            customer.setName(name);
+            customer.setSurname(surname);
+            customer.setEmail(email);
+            customer.setPassword(password);
 
-        customerDao.save(customer);
+            customerDao.save(customer);
+
+            sendMessage(FacesMessage.SEVERITY_INFO, "Deine Registrierung war erfolgreich", "");
+
+            resetForm();
+
+            return "login.xhtml";
+        }
     }
 
-    private void reset() {
+    private void sendMessage(FacesMessage.Severity severity, String summary, String detail) {
+        FacesContext.getCurrentInstance().
+                addMessage(null, new FacesMessage(severity, summary, detail));
+    }
+
+    private void resetForm() {
         name = "";
         surname = "";
         email = "";

@@ -1,6 +1,7 @@
 package de.falkmarinov.Internettechnologien.controller;
 
 import de.falkmarinov.Internettechnologien.config.ThymeleafConfig;
+import de.falkmarinov.Internettechnologien.handler.UserSessionHandler;
 import de.falkmarinov.Internettechnologien.model.ShoppingCart;
 import de.falkmarinov.Internettechnologien.service.BookService;
 import de.falkmarinov.Internettechnologien.service.CategoryService;
@@ -27,15 +28,19 @@ public class BooksController extends HttpServlet {
     @Inject
     private ShoppingCart shoppingCart;
 
+    @Inject
+    private UserSessionHandler loginHandler;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws IOException {
 
         WebContext context = new WebContext(request, response, request.getServletContext());
         TemplateEngine engine = (TemplateEngine) request.getServletContext().getAttribute(ThymeleafConfig.TEMPLATE_ENGINE_ATTR);
 
         context.setVariable("categories", categoryService.getAllCategories());
         context.setVariable("shoppingCartSize", shoppingCart.getPositionEntryList().size());
+        context.setVariable("loggedInCustomer", loginHandler.getLoggedInCustomer());
 
         String categoryId = request.getParameter("c");
 
