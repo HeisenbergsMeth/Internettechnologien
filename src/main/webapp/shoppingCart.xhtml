@@ -20,9 +20,7 @@
     <f:metadata>
         <f:viewParam name="id" value="#{shoppingCart.lastInsertedId}"/>
     </f:metadata>
-    <ui:insert name="header">
-        <ui:include src="WEB-INF/facelets/header.xhtml"/>
-    </ui:insert>
+    <ui:include src="WEB-INF/facelets/header.xhtml"/>
     <h:form id="list" styleClass="container mt-5">
         <div class="row">
             <div class="col-8">
@@ -38,11 +36,19 @@
                     <tbody>
                     <p:repeat value="#{shoppingCart.positionEntryList}" var="position">
                         <tr>
-                            <td><img class="book-size" src="${shoppingCart.getBook(position.key).picture}" alt="Cover"/>
-                            </td>
-                            <td>${shoppingCart.getBook(position.key).title}</td>
                             <td>
-                                <h:outputText value="${shoppingCart.getBook(position.key).price}">
+                                <img class="book-size" src="${shoppingCart.getBook(position.key).picture}" alt="Cover"/>
+                            </td>
+                            <td>
+                                <div class="mb-2">
+                                    #{shoppingCart.getBook(position.key).title}
+                                </div>
+                                <h:commandLink styleClass="link-secondary" value="Löschen"
+                                               action="#{shoppingCart.removeBook(position.key)}"
+                                               update="list"/>
+                            </td>
+                            <td>
+                                <h:outputText value="#{shoppingCart.getBook(position.key).price}">
                                     <f:convertNumber type="currency" currencySymbol="€"/>
                                 </h:outputText>
                             </td>
@@ -54,12 +60,9 @@
                                 <h:commandButton styleClass="btn btn-primary" value="+"
                                                  action="#{shoppingCart.increaseAmount(position.key)}"
                                                  update="list"/>
-                                <h:commandButton styleClass="ms-3 btn btn-outline-danger" style="width: 3rem" image="assets/trash.svg"
-                                                 action="#{shoppingCart.removeBook(position.key)}"
-                                                 update="list"/>
                             </td>
                             <td>
-                                <h:outputText value="${shoppingCart.getBook(position.key).price * position.value}">
+                                <h:outputText value="#{shoppingCart.getBook(position.key).price * position.value}">
                                     <f:convertNumber type="currency" currencySymbol="€"/>
                                 </h:outputText>
                             </td>
