@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <ui:composition>
+        <div class="col">
+            <p:repeat value="#{shoppingCart.positionEntryList}" var="position">
+                <div class="row">
+                    <div class="col offset-1 mt-5">
+                        <img style="width: 2rem" src="${shoppingCart.getBook(position.key).picture}" alt="Cover"/>
+                        <h:outputText styleClass="ms-3"
+                                      value="#{position.value}x #{shoppingCart.getBook(position.key).title}"/>
+                    </div>
+                    <div class="col align-self-center mt-5">
+                        <h:outputText styleClass="ms-3"
+                                      value="#{shoppingCart.getBook(position.key).price * position.value}">
+                            <f:convertNumber type="currency" currencySymbol="€"/>
+                        </h:outputText>
+                    </div>
+                </div>
+            </p:repeat>
+            <div class="col-7 offset-1">
+                <hr/>
+            </div>
+            <div class="row">
+                <div class="col offset-1">
+                    <span>Zwischensumme</span>
+                </div>
+                <div class="col align-self-center">
+                    <h:outputText styleClass="ms-3" value="${shoppingCart.total}">
+                        <f:convertNumber type="currency" currencySymbol="€"/>
+                    </h:outputText>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-1">
+                    <span>Versand</span>
+                </div>
+                <div class="col align-self-center">
+                    <span class="ms-3">0 €</span>
+                </div>
+            </div>
+            <div class="col-7 offset-1">
+                <hr/>
+            </div>
+            <div class="row">
+                <div class="col offset-1">
+                    <span class="fw-bold">Gesamt</span>
+                </div>
+                <div class="col align-self-center">
+                    <h:outputText styleClass="ms-3" value="${shoppingCart.total}">
+                        <f:convertNumber type="currency" currencySymbol="€"/>
+                    </h:outputText>
+                </div>
+            </div>
+        </div>
+    </ui:composition>
+</f:view>
+</html>

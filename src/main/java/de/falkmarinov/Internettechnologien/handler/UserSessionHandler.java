@@ -8,9 +8,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.Optional;
 
@@ -22,11 +19,19 @@ public class UserSessionHandler implements Serializable {
     @Named("customerDao")
     private CustomerDao customerDao;
 
-    private Customer loggedInCustomer = new Customer();
-    private boolean loggedIn = false;
+    @Inject
+    private OrderProcessHandler orderProcessHandler;
+
+    private Customer loggedInCustomer;
+    private boolean loggedIn;
 
     private String email;
     private String password;
+
+    public UserSessionHandler() {
+        loggedInCustomer = new Customer();
+        loggedIn = false;
+    }
 
     public String login() {
         Optional<Customer> optionalCustomer = customerDao.findUserByEmail(email);
@@ -50,6 +55,7 @@ public class UserSessionHandler implements Serializable {
     public String logout() {
         loggedInCustomer = new Customer();
         loggedIn = false;
+        orderProcessHandler.reset();
         return "login.xhtml";
     }
 

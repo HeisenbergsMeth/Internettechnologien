@@ -26,6 +26,8 @@ public class ShoppingCart implements Serializable {
 
     private final Map<Long, Integer> positions = new HashMap<>();
 
+    private Boolean orderButtonDisabled;
+
     public void insertBook(Long id) {
         if (!positions.containsKey(id)) {
             positions.put(id, 1);
@@ -34,6 +36,8 @@ public class ShoppingCart implements Serializable {
     }
 
     public void removeBook(Long id) {
+        Integer amount = positions.get(id);
+        total -= amount * getBook(id).getPrice();
         positions.remove(id);
     }
 
@@ -81,6 +85,10 @@ public class ShoppingCart implements Serializable {
         insertBook(lastInsertedId);
     }
 
+    public Map<Long, Integer> getPositions() {
+        return positions;
+    }
+
     private void increaseTotal(Long id) {
         Book book = getBook(id);
         total += book.getPrice();
@@ -89,5 +97,18 @@ public class ShoppingCart implements Serializable {
     private void decreaseTotal(Long id) {
         Book book = getBook(id);
         total -= book.getPrice();
+    }
+
+    public Boolean getOrderButtonDisabled() {
+        return positions.size() <= 0;
+    }
+
+    public void setOrderButtonDisabled(Boolean orderButtonDisabled) {
+        this.orderButtonDisabled = orderButtonDisabled;
+    }
+
+    public void reset() {
+        total = 0.0;
+        positions.clear();
     }
 }

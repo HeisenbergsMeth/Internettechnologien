@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<f:view>
+    <ui:composition>
+        <div class="col">
+            <h:form id="form" styleClass="container mt-5 w-75">
+                <div class="row">
+                    <div class="fw-bold">
+                        Kontaktinformationen
+                    </div>
+                    <div class="mt-2">
+                        <h:outputText styleClass="d-block"
+                                      value="#{userSessionHandler.loggedInCustomer.name} #{userSessionHandler.loggedInCustomer.surname}"/>
+                        <h:outputText styleClass="d-block"
+                                      value="#{userSessionHandler.loggedInCustomer.email}"/>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="fw-bold">
+                        Lieferadresse
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            Straße und Hausnummer
+                            <h:inputText id="street"
+                                         styleClass="form-control"
+                                         value="#{orderProcessHandler.street}"
+                                         required="true"
+                                         requiredMessage="Bitte Straße und Hausnummer angeben"
+                                         validatorMessage="Darf nur folgendes beinhalten: A-Z a-z Leerzeichen Umlaute"/>
+                            <h:message for="street" styleClass="text-danger"/>
+                        </div>
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            PLZ
+                            <h:inputText id="zip"
+                                         styleClass="form-control"
+                                         value="#{orderProcessHandler.zip}"
+                                         required="true"
+                                         requiredMessage="Bitte die Postleitzahl angeben"
+                                         validatorMessage="Postleitzahl nur Zahlen und 5 Stellen">
+
+                                <f:validateRegex pattern="^[0-9]*$"/>
+                                <f:validateLength minimum="5" maximum="5"/>
+
+                            </h:inputText>
+                            <h:message for="zip" styleClass="text-danger"/>
+                        </div>
+                        <div class="col">
+                            Ort
+                            <h:inputText id="place"
+                                         styleClass="form-control"
+                                         value="#{orderProcessHandler.place}"
+                                         required="true"
+                                         requiredMessage="Bitte den Ort angeben"
+                                         validatorMessage="Postleitzahl nur Zahlen und 5 Stellen"/>
+                            <h:message for="place" styleClass="text-danger"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="fw-bold">
+                        Zahlung
+                    </div>
+                    <div class="row mt-2">
+                        <div class="col">
+                            <h:selectOneRadio onchange="switchCreditCardInputVisibility()" layout="pageDirection"
+                                              value="#{orderProcessHandler.paymentMethod}">
+                                <f:selectItem itemValue="Rechnung" itemLabel="Rechnung"/>
+                                <f:selectItem id="creditCard" itemValue="Kreditkarte" itemLabel="Kreditkarte"/>
+                            </h:selectOneRadio>
+                        </div>
+                        <div id="creditCardInput"
+                             class="col #{(orderProcessHandler.paymentMethod)=='Rechnung'?'invisible':''}">
+                            Kreditkartennummer
+                            <h:inputText id="creditCardField"
+                                         styleClass="form-control"
+                                         value="#{orderProcessHandler.cardNo}"
+                                         requiredMessage="Bitte die Kartennummer angeben"/>
+                            <h:message for="creditCardField"/>
+                            <div class="row">
+                                <div class="col">
+                                    Ablaufdatum
+                                    <h:inputText id="expirationDate"
+                                                 styleClass="form-control"
+                                                 value="#{orderProcessHandler.cardExpirationDate}"
+                                                 requiredMessage="Bitte das Ablaufdatum angeben"/>
+                                    <h:message for="expirationDate"/>
+                                </div>
+                                <div class="col">
+                                    CVC
+                                    <h:inputText id="cvc"
+                                                 styleClass="form-control"
+                                                 requiredMessage="Bitte das Ablaufdatum angeben"/>
+                                    <h:message for="cvc"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-row mt-5 d-flex justify-content-between">
+                    <p:link styleClass="link-secondary" value="Zurück" href="shoppingCart.xhtml"/>
+                    <h:commandButton update="form" styleClass="btn btn-primary me-4" value="Überprüfen"
+                                     action="#{orderProcessHandler.nextStep}"/>
+                </div>
+            </h:form>
+        </div>
+        <h:outputScript>
+            function switchCreditCardInputVisibility() {
+                let radioButton = document.querySelector('input[value="Kreditkarte"]');
+                let creditCardInput = document.getElementById('creditCardInput');
+
+                if (radioButton.checked) {
+                    creditCardInput.classList.remove('invisible');
+                } else {
+                    creditCardInput.classList.add('invisible');
+                }
+
+                console.log('test');
+            }
+        </h:outputScript>
+    </ui:composition>
+</f:view>
+</html>

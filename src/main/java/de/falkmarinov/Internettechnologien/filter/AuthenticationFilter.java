@@ -25,6 +25,7 @@ public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) {
         matchers.add("/user.xhtml");
+        matchers.add("/order.xhtml");
     }
 
     @Override

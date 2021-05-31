@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<f:view>
+    <ui:composition>
+        <div class="col">
+            <h:form id="form" styleClass="container mt-5 w-75">
+                <div class="fw-bold">
+                    Lieferadresse
+                </div>
+                <div class="mt-2">
+                    <h:outputText styleClass="d-block"
+                                  value="#{userSessionHandler.loggedInCustomer.name} #{userSessionHandler.loggedInCustomer.surname}"/>
+                    <h:outputText styleClass="d-block"
+                                  value="#{orderProcessHandler.street}"/>
+                    <h:outputText styleClass="d-block"
+                                  value="#{orderProcessHandler.zip} #{orderProcessHandler.place}"/>
+                </div>
+                <div class="fw-bold mt-5">
+                    Zahlung
+                </div>
+                <div class="mt-2">
+                    <h:outputText styleClass="d-block"
+                                  value="#{orderProcessHandler.paymentMethod}"/>
+                </div>
+                <div class="flex-row mt-5 d-flex justify-content-between">
+                    <h:commandButton update="form" styleClass="link-secondary" value="Zurück"
+                                     action="#{orderProcessHandler.stepBack}"/>
+                    <h:commandButton update="form" styleClass="btn btn-primary me-4" value="Abschließen"
+                                     action="#{orderProcessHandler.checkout}"/>
+                </div>
+            </h:form>
+        </div>
+    </ui:composition>
+</f:view>
+</html>
