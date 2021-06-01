@@ -55,7 +55,7 @@ public class OrderProcessHandler implements Serializable {
         this.reset();
         shoppingCart.reset();
 
-        return "shoppingCart.xhtml";
+        return "confirmation.xhtml";
     }
 
     public void reset() {
